@@ -16,15 +16,9 @@ const columns = [
   { id: "more", label: "More", minWidth: 300 },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
 const rows = [];
 
 const App = () => {
-  const [pokemons, setPokemons] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
@@ -39,7 +33,6 @@ const App = () => {
 
   useEffect(() => {
     api.get("pokemon?offset=0&limit=4").then(({ data }) => {
-      setPokemons(data);
       for (let i = 0; i < data.results.length; i++) {
         let dados = {
           name: data.results[i].name,
